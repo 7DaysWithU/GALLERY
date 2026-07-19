@@ -99,11 +99,12 @@ import {MarqueeText} from '@/components/text'
     gap: 5rem;
     
     font-size: var(--font-size-base);
-    /*border: 1px solid var(--color-white-shadow-dark);*/
 }
 
 .menu-left {
     color: var(--color-white-shadow-light);
+    /*浏览器补丁*/
+    font-size: var(--font-size-base);
 }
 
 .menu-right {
@@ -127,6 +128,11 @@ import {MarqueeText} from '@/components/text'
     transform: translate3d(0.1rem, 0, 0);
 }
 
+.menu-right-item__text{
+    /*浏览器补丁*/
+    font-size: var(--font-size-base);
+}
+
 .container-middle {
     display: flex;
     justify-content: space-between;
@@ -146,6 +152,7 @@ import {MarqueeText} from '@/components/text'
 .mail__header,
 .mail__content {
     position: relative;
+    font-size: var(--font-size-display-small);
 }
 
 /*下划线动画*/
