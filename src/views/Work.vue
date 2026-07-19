@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, watch} from 'vue'
+import {onMounted, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import {EndBar, ImageCard, TopBar} from "@/components/common";
 import {AutoFloatUpText, ImageFillText, MarqueeText} from '@/components/text'

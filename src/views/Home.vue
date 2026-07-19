@@ -4,7 +4,10 @@ import {TopBar, Banner, ImageCard, EndBar} from "@/components/common";
 import {RevealText, MarqueeText, AutoFloatUpText} from '@/components/text'
 import type {BannerImageItem, ZoomImageItem} from "@/types/item";
 import {createBannerImageItem, createZoomImageItem} from "@/composables/item";
+import {useRoute} from 'vue-router'
 
+
+const route = useRoute()
 
 const loaded = ref(false)
 const bannerImages = ref<BannerImageItem[]>([])
@@ -118,6 +121,17 @@ onMounted(async () => {
     }
     finally {
         loaded.value = true
+    }
+    
+    // 防止只停在页面顶部, 不滚动到指定id
+    if (route.hash) {
+        // 延迟一小段时间确保元素已渲染
+        setTimeout(() => {
+            const el = document.querySelector(route.hash)
+            if (el) {
+                el.scrollIntoView({behavior: 'smooth'})
+            }
+        }, 100)
     }
 })
 </script>
