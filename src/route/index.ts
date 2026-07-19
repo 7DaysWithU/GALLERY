@@ -1,5 +1,7 @@
 import {createRouter, createWebHistory, type RouteRecordRaw} from 'vue-router'
 import {Home, Work} from '@/views'
+import {transitionState} from '@/state/transition'
+import {loadWorkData} from '@/state/workData'
 
 
 const routes: RouteRecordRaw[] = [
@@ -57,7 +59,7 @@ const router = createRouter({
         // 3. 浏览器前进/后退时恢复滚动位置
         if (savedPosition) return savedPosition
 
-        // 4. Work 路由使用 instant（避免与过渡层冲突），其他路由平滑滚动到顶部
+        // 4. Work 路由使用 instant(避免与过渡层冲突)，其他路由平滑滚动到顶部
         if (to.name === 'Work') {
             return {top: 0, behavior: 'instant'}
         }
@@ -65,11 +67,19 @@ const router = createRouter({
     }
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to, from, next) => {
     // 默认路由守卫
     if (to.meta.title) {
         document.title = to.meta.title as string
     }
+    // 过渡页面
+    if (to.name === 'Work' && from.name !== 'Work') {
+        transitionState.active = true
+        transitionState.loaded = false
+        transitionState.text = to.params.name as string
+        await loadWorkData(to.params.name as string)
+    }
+    next()
 })
 
 export default router

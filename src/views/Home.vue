@@ -1,112 +1,131 @@
 <script setup lang="ts">
+import {ref, onMounted} from 'vue'
 import {TopBar, Banner, ImageCard, EndBar} from "@/components/common";
 import {RevealText, MarqueeText, AutoFloatUpText} from '@/components/text'
 import type {BannerImageItem, ZoomImageItem} from "@/types/item";
 import {createBannerImageItem, createZoomImageItem} from "@/composables/item";
 
 
-const bannerImages: BannerImageItem[] = [
-    await createBannerImageItem({
-        src: '/postcards/original/132合肥舰_逐浪.jpg',
-        title: '逐浪',
-        desc: '钢铁之上, 浪花在燃烧',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/几何的沉默_仰望.jpg',
-        title: '仰望',
-        desc: '穹顶撒下光辉',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/山海印象_莱山.jpg',
-        title: '黄海明珠',
-        desc: '黄海海上明珠, 黄海城市花园',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/拾光_微醺张裕.jpg',
-        title: '微醺张裕',
-        desc: '一杯酒, 一座城的微光',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/海_钓鱼佬.jpg',
-        title: '钓鱼佬',
-        desc: '等一个咬钩的黄昏',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/海滨叙事诗_童话.jpg',
-        title: '渔人码头',
-        desc: '欧式屋檐下, 海风藏了故事',
-        offsetY: -3
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/蓝调时刻_暴雨.jpg',
-        title: '暴雨',
-        desc: '蓝调在雨中溺了, 又浮起',
-    }),
-    await createBannerImageItem({
-        src: '/postcards/original/雅顾_猛虎.jpg',
-        title: '猛虎',
-        desc: '猛虎上树',
-        offsetY: 1
-    }),
-]
-const zoomImages: ZoomImageItem[] = [
-    await createZoomImageItem({
-        src: '/postcards/original/海滨叙事诗_初见.jpg',
-        title: '海滨叙事诗',
-        desc: '海风拂过, 初见即是永远',
-        baseSize: '50vw'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/海_钓鱼佬.jpg',
-        title: '海',
-        desc: '等一个咬钩的黄昏',
-        baseSize: '40vw',
-        layout: 'column'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/拾光_花海.jpg',
-        title: '拾光',
-        desc: '花开无声, 时光有痕',
-        baseSize: '45vw',
-        layout: 'column'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/蓝调时刻_暴雨.jpg',
-        title: '蓝调时刻',
-        desc: '蓝调在雨中溺了, 又浮起',
-        baseSize: '70vw'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/132合肥舰_归港.jpg',
-        title: '132合肥舰',
-        desc: '钢铁巨兽, 终有归期',
-        baseSize: '28vw'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/几何的沉默_回响.jpg',
-        title: '几何的沉默',
-        desc: '几何的沉默里, 有回声在游荡',
-        baseSize: '26vw'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/雅顾_猛虎.jpg',
-        title: '雅顾',
-        desc: '虚焦带来的油画质感',
-        baseSize: '25vw'
-    }),
-    await createZoomImageItem({
-        src: '/postcards/original/山海印象_牟平.jpg',
-        title: '山海印象',
-        desc: '仙境海岸, 品重烟台',
-        baseSize: '72vw'
-    })
-]
+const loaded = ref(false)
+const bannerImages = ref<BannerImageItem[]>([])
+const zoomImages = ref<ZoomImageItem[]>([])
+
+onMounted(async () => {
+    try {
+        const [banners, zooms] = await Promise.all([
+            Promise.all([
+                await createBannerImageItem({
+                    src: '/postcards/original/132合肥舰_逐浪.jpg',
+                    title: '逐浪',
+                    desc: '钢铁之上, 浪花在燃烧',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/几何的沉默_仰望.jpg',
+                    title: '仰望',
+                    desc: '穹顶撒下光辉',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/山海印象_莱山.jpg',
+                    title: '黄海明珠',
+                    desc: '黄海海上明珠, 黄海城市花园',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/拾光_微醺张裕.jpg',
+                    title: '微醺张裕',
+                    desc: '一杯酒, 一座城的微光',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/海_钓鱼佬.jpg',
+                    title: '钓鱼佬',
+                    desc: '等一个咬钩的黄昏',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/海滨叙事诗_童话.jpg',
+                    title: '渔人码头',
+                    desc: '欧式屋檐下, 海风藏了故事',
+                    offsetY: -3
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/蓝调时刻_暴雨.jpg',
+                    title: '暴雨',
+                    desc: '蓝调在雨中溺了, 又浮起',
+                }),
+                await createBannerImageItem({
+                    src: '/postcards/original/雅顾_猛虎.jpg',
+                    title: '猛虎',
+                    desc: '猛虎上树',
+                    offsetY: 1
+                })
+            ]),
+            Promise.all([
+                await createZoomImageItem({
+                    src: '/postcards/original/海滨叙事诗_初见.jpg',
+                    title: '海滨叙事诗',
+                    desc: '海风拂过, 初见即是永远',
+                    baseSize: '50vw'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/海_钓鱼佬.jpg',
+                    title: '海',
+                    desc: '等一个咬钩的黄昏',
+                    baseSize: '40vw',
+                    layout: 'column'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/拾光_花海.jpg',
+                    title: '拾光',
+                    desc: '花开无声, 时光有痕',
+                    baseSize: '45vw',
+                    layout: 'column'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/蓝调时刻_暴雨.jpg',
+                    title: '蓝调时刻',
+                    desc: '蓝调在雨中溺了, 又浮起',
+                    baseSize: '70vw'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/132合肥舰_归港.jpg',
+                    title: '132合肥舰',
+                    desc: '钢铁巨兽, 终有归期',
+                    baseSize: '28vw'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/几何的沉默_回响.jpg',
+                    title: '几何的沉默',
+                    desc: '几何的沉默里, 有回声在游荡',
+                    baseSize: '26vw'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/雅顾_猛虎.jpg',
+                    title: '雅顾',
+                    desc: '虚焦带来的油画质感',
+                    baseSize: '25vw'
+                }),
+                await createZoomImageItem({
+                    src: '/postcards/original/山海印象_牟平.jpg',
+                    title: '山海印象',
+                    desc: '仙境海岸, 品重烟台',
+                    baseSize: '72vw'
+                })
+            ])
+        ])
+        bannerImages.value = banners
+        zoomImages.value = zooms
+    }
+    catch (error) {
+        console.error('Failed to load HomePage images:', error)
+    }
+    finally {
+        loaded.value = true
+    }
+})
 </script>
 
 <template>
-    <TopBar/>
+    <TopBar v-if="loaded"/>
     
-    <body>
+    <body v-if="loaded">
         <section class="section-banner">
             <Banner :images="bannerImages"/>
         </section>
@@ -172,7 +191,7 @@ const zoomImages: ZoomImageItem[] = [
         </section>
     </body>
     
-    <EndBar/>
+    <EndBar v-if="loaded"/>
 </template>
 
 <style scoped>

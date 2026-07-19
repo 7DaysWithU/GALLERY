@@ -1,5 +1,5 @@
 export interface SeriesConfig {
-    name: string                 // 系列名（对应路由参数）
+    name: string                 // 系列名(对应路由参数)
     title: string                // 显示标题
     title_image_src: string      // 镂空标题所用图片的路径
     description: string          // 描述文本
@@ -52,7 +52,7 @@ export const seriesConfigs: SeriesConfig[] = [
             {
                 src: basePath + '海滨叙事诗_山海之城.jpg',
                 title: '山海之城',
-                desc: '山与海之间，一座城的呼吸。（画面背后是烟台自然博物馆~）',
+                desc: '山与海之间，一座城的呼吸。(画面背后是烟台自然博物馆~)',
                 baseSize: '70vw'
             },
             {

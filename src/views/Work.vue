@@ -1,52 +1,15 @@
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from 'vue'
+import {computed, onMounted, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import {EndBar, ImageCard, TopBar} from "@/components/common";
 import {AutoFloatUpText, ImageFillText, MarqueeText} from '@/components/text'
-import type {ZoomImageItem} from "@/types/item";
-import {createZoomImageItem} from "@/composables/item";
-import {seriesConfigs} from '@/data/series.config'
+import {workData} from '@/state/workData'
 
 
 const route = useRoute()
 
 
-const currentSeriesConfig = computed(() => {
-    return seriesConfigs.find(c => c.name === route.params.name)
-})
-const titleImageSrc = computed(() => {
-    const config = currentSeriesConfig.value
-    if (!config) return ''
-    return new URL(config.title_image_src, import.meta.url).href
-})
-const worksTitleList = computed(() => {
-    const config = currentSeriesConfig.value
-    if (!config) return ''
-    return config.works.map(w => `《${w.title}》`).join('、')
-})
-const zoomImages = ref<ZoomImageItem[]>([])
-
-/**
- * 构建图片ZoomImageItem对象
- */
-async function buildWorks(): Promise<void> {
-    if (!currentSeriesConfig.value) {
-        zoomImages.value = []
-        return
-    }
-    
-    zoomImages.value = await Promise.all(
-        currentSeriesConfig.value.works.map(w =>
-            createZoomImageItem({
-                src: new URL(w.src, import.meta.url).href,
-                title: w.title,
-                desc: w.desc,
-                baseSize: w.baseSize,
-                layout: w.layout
-            })
-        )
-    )
-}
+const {currentSeriesConfig, zoomImages, titleImageSrc, worksTitleList} = workData
 
 /**
  * 设置标题
@@ -56,9 +19,10 @@ function setTitle(): void {
 }
 
 watch(() => route.params.name, setTitle)
-watch(() => route.params.name, buildWorks, {immediate: true})
 
-onMounted(setTitle)
+onMounted(async () => {
+    setTitle()
+})
 </script>
 
 <template>
