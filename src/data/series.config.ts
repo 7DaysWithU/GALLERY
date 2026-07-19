@@ -13,7 +13,7 @@ export interface SeriesConfig {
     }[]
 }
 
-export const basePath = '../assets/postcards/original/'
+export const basePath = '/postcards/original/'
 
 export const seriesConfigs: SeriesConfig[] = [
     {
