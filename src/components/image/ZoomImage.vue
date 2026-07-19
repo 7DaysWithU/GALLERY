@@ -145,5 +145,13 @@ onUnmounted(() => {
     transition: transform 1.25s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: transform;
     transform-origin: center center;
+    
+    /* 消除细白线 */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast; /* 优化边缘 */
+    border: none;
+    outline: none;
 }
 </style>

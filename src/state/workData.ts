@@ -60,7 +60,8 @@ async function preloadImages(urls: string[]): Promise<void> {
  * @param seriesName 系列名
  */
 export async function loadWorkData(seriesName: string): Promise<void> {
-    await new Promise(resolve => setTimeout(resolve, 5000))
+    // 测试用
+    // await new Promise(resolve => setTimeout(resolve, 5000))
 
     // 防止重复加载
     if (workData.loading.value) return
