@@ -1,0 +1,6 @@
+export {default as RevealText} from '@/components/text/RevealText.vue'
+export {default as MarqueeText} from '@/components/text/MarqueeText.vue'
+export {default as FloatUpText} from '@/components/text/FloatUpText.vue'
+export {default as AutoFloatUpText} from '@/components/text/AutoFloatUpText.vue'
+export {default as ImageFillText} from '@/components/text/ImageFillText.vue'
+export {default as LongText} from '@/components/text/LongText.vue'

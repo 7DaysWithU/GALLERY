@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* font: Telegraf */
+@font-face {
+    font-family: 'Telegraf';
+    src: url('@/assets/fonts/PPTelegraf-Regular.otf') format('opentype');
+    font-weight: 400;
+    descent-override: 1%;
+}
+
+@font-face {
+    font-family: 'Telegraf';
+    src: url('@/assets/fonts/PPTelegraf-Ultralight.otf') format('opentype');
+    font-weight: 300;
+    descent-override: 1%;
+}
+
+/* font: MiSans */
+@font-face {
+    font-family: 'MiSans';
+    src: url('@/assets/fonts/MiSans-Regular.otf') format('opentype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'MiSans';
+    src: url('@/assets/fonts/MiSans-Normal.otf') format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'MiSans';
+    src: url('@/assets/fonts/MiSans-ExtraLight.otf') format('opentype');
+    font-weight: 300;
+}
+
+/* 全局变量 */
+:root {
+    /* 字体大小 */
+    /* 标题 */
+    --font-size-display-xlarge: 15rem;
+    --font-size-display-large: 10rem;
+    --font-size-display: 8rem; /* 72px - 首页主标题/品牌名 */
+    --font-size-display-small: 6rem;
+    --font-size-h1: 3.75rem; /* 56px - 页面主标题 */
+    --font-size-h2: 3.25rem; /* 44px - 系列名/区块标题 */
+    --font-size-h3: 3rem; /* 32px - 卡片标题/次级标题 */
+    --font-size-h4: 2.5rem; /* 28px - 小标题/副标题 */
+
+    /* 正文 */
+    --font-size-large: 2rem; /* 20px - 强调正文/引文 */
+    --font-size-medium: 1.5rem; /* 16px - 辅助正文/描述文字 */
+    --font-size-base: 1.25rem; /* 18px - 主体正文(阅读舒适) */
+
+    /* 辅助文本 */
+    --font-size-small: 0.875rem; /* 14px - 图片说明/日期/作者 */
+    --font-size-xs: 0.75rem; /* 12px - 版权/极次要信息 */
+
+    /* 字体粗细 */
+    --font-weight-bold: 700;
+
+
+    /* 字体颜色 */
+    --text1: #18191C;
+    --text2: #61666D;
+    --text3: #9499A0;
+    --text4: #C9CCD0;
+
+
+    /* 背景颜色 */
+    --color-blue-theme: rgb(0, 174, 236);
+    --color-blue-theme-shadow: rgba(0, 174, 236, 0.4);
+    --color-blue-theme-shadow-light: rgba(0, 174, 236, 0.7);
+    --color-green-theme: rgb(0, 204, 153);
+    --color-white: rgb(255, 255, 255);
+    --color-white-dark: rgb(244, 245, 246);
+    --color-white-shadow-light: rgba(255, 255, 255, 0.5);
+    --color-white-shadow-dark: rgba(255, 255, 255, 0.2);
+    --color-black: rgb(0, 0, 0);
+    --color-black-light: rgb(96, 101, 108);
+    --color-black-shadow: rgba(0, 0, 0, 0.15);
+    --color-black-mask: rgba(0, 0, 0, 0.9);
+    --color-gray: rgb(228, 230, 231);
+    --color-gray-light: rgb(240, 241, 242);
+    --color-transparent: transparent;
+    --color-red: rgb(253, 103, 111);
+    --color-orange: rgb(234, 91, 12);
+
+
+    /* z-index层级 */
+    --z-index-top: 4;
+    --z-index-subtop: 3;
+    --z-index-middle: 2;
+    --z-index-lg: 1;
+    --z-index-base: 0;
+    --z-index-bottom: -1;
+}
+
+/* 盒模型 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 清除默认 margin/padding */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* 列表重置 */
+ul, ol {
+    list-style: none;
+}
+
+/* 链接重置 */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 响应式 */
+img, video {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+/* body基础 */
+body {
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+
+    /*设置字体且关闭连字*/
+    font-family: 'Telegraf', 'MiSans', sans-serif;
+    font-variant-ligatures: none;
+}
+
+/* app布局 */
+#app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* 表单控件重置 */
+input,
+textarea,
+select,
+button {
+    font: inherit; /* 继承字体 */
+    border: none; /* 清除默认边框 */
+    outline: none; /* 清除聚焦轮廓 ← 关键！ */
+    background: transparent; /* 清除默认背景 */
+    appearance: none; /* 清除系统默认样式(如 Safari 按钮) */
+}
+
+/* 按钮默认鼠标样式为小手 */
+button {
+    cursor: pointer;
+}
+
+/* 单行文本省略 */
+.ellipsis {
+    white-space: nowrap; /* 禁止换行 */
+    overflow: hidden; /* 隐藏溢出内容 */
+    text-overflow: ellipsis; /* 溢出部分显示省略号 */
+    min-width: 0; /* 覆盖flex的auto, 防止超宽抖动 */
+}
+
+/* 多行文本省略 */
+.ellipsis-multi {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* 行数 */
+    overflow: hidden;
+}
+
+/* 居中容器 */
+.container--normal {
+    width: 100%;
+    padding: 0 10vw;
+}
+
+.container--narrow {
+    width: 100%;
+    padding: 0 15vw;
+}
