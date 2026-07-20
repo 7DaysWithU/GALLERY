@@ -6,9 +6,9 @@
 
 ## ✨ 预览
 
-![预览图](src/assets/postcards/original/132合肥舰_逐浪.jpg)
+![预览图](src/assets/preview.png)
 
-> 你可以直接访问 [在线链接]() 查看完整效果。
+> 你可以直接访问 [在线链接](https://gallery-psi-vert.vercel.app/) 查看完整效果。
 
 ## 📸 系列作品
 

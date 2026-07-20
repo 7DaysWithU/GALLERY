@@ -54,6 +54,12 @@ async function preloadImages(urls: string[]): Promise<void> {
     await Promise.allSettled(validUrls.map(preloadImage))
 }
 
+// 过渡层最小显示时长: 1s
+// 过渡组件 PageTransition 中的 transform = 1.2s
+// 入场和出场动画总计 1.2s * 2 = 2.4s
+// 但 transform 的入场和出场动画不算做过渡层显示时间内
+const MIN_DISPLAY_MS = 1000
+
 /**
  * 加载作品数据
  *
@@ -66,9 +72,10 @@ export async function loadWorkData(seriesName: string): Promise<void> {
     // 防止重复加载
     if (workData.loading.value) return
     workData.loading.value = true
-
     // 重置错误
     workData.error.value = null
+    // 记录开始时间
+    const startTime = performance.now()
 
     try {
         // 1. 查找系列配置
@@ -113,6 +120,15 @@ export async function loadWorkData(seriesName: string): Promise<void> {
     }
     finally {
         workData.loading.value = false
+
+        // 计算已用时间
+        const elapsed = performance.now() - startTime
+        const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed)
+        // 如果剩余时间 > 0，则等待
+        if (remaining > 0) {
+            await new Promise(resolve => setTimeout(resolve, remaining))
+        }
+
         // 数据加载完成(无论成功或失败)，触发过渡层退出
         transitionState.loaded = true
     }
