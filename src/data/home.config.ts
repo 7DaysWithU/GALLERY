@@ -24,6 +24,31 @@ export interface HomeZoomItem {
 
 export const basePath = '/postcards/original/'
 
+export const homeTexts = {
+    title: '画廊',
+    subtitle: 'GALLERY',
+    sections: [
+        {
+            lines: [
+                {text: '欢迎来到 GALLERY！', isTitle: true},
+                {text: '一些瞬间, 被悄悄印成卡片', isTitle: false},
+                {text: '斑斓的, 沉默的, 都变成轻巧的纸', isTitle: false},
+                {text: '海在远方, 故事在指尖', isTitle: false},
+                {text: '这里没有终点, 只有翻页的声音', isTitle: false}
+            ]
+        },
+        {
+            lines: [
+                {text: '这是一份电子纪念册', isTitle: true},
+                {text: '从一艘舰, 到一片海', isTitle: false},
+                {text: '从几何的沉默, 到蓝调时刻', isTitle: false},
+                {text: '这些明信片, 和你同走过一座城', isTitle: false},
+                {text: '剩下的, 交给你来翻阅', isTitle: false}
+            ]
+        }
+    ]
+}
+
 export const homeBanners: HomeBannerItem[] = [
     {
         src: basePath + '132合肥舰_逐浪.jpg',
@@ -121,28 +146,3 @@ export const homeZooms: HomeZoomItem[] = [
         baseSize: '72vw'
     },
 ]
-
-export const homeTexts = {
-    title: '画廊',
-    subtitle: 'GALLERY',
-    sections: [
-        {
-            lines: [
-                {text: '欢迎来到 GALLERY！', isTitle: true},
-                {text: '一些瞬间, 被悄悄印成卡片', isTitle: false},
-                {text: '斑斓的, 沉默的, 都变成轻巧的纸', isTitle: false},
-                {text: '海在远方, 故事在指尖', isTitle: false},
-                {text: '这里没有终点, 只有翻页的声音', isTitle: false}
-            ]
-        },
-        {
-            lines: [
-                {text: '这是一份电子纪念册', isTitle: true},
-                {text: '从一艘舰, 到一片海', isTitle: false},
-                {text: '从几何的沉默, 到蓝调时刻', isTitle: false},
-                {text: '这些明信片, 和你同走过一座城', isTitle: false},
-                {text: '剩下的, 交给你来翻阅', isTitle: false}
-            ]
-        }
-    ]
-}
