@@ -9,10 +9,14 @@ import {homeData, loadHomeData} from '@/state/homeData'
 const route = useRoute()
 
 const loaded = computed(() => homeData.loaded.value)
+const title = homeData.title
+const subtitle = homeData.subtitle
+const sections = homeData.sections
 const bannerImages = homeData.bannerImages
 const zoomImages = homeData.zoomImages
 
 onMounted(async () => {
+    // 阻塞加载, 且运行期间只加载一次即可(加载逻辑内部判断)
     await loadHomeData()
     
     // 防止只停在页面顶部, 不滚动到指定id
@@ -39,45 +43,24 @@ onMounted(async () => {
             <div class="selection-text-title">
                 <AutoFloatUpText class="title-box-wrapper">
                     <div class="title-box">
-                        <div>画廊</div>
+                        <div>{{ title }}</div>
                         <div class="title-icon">©</div>
                         <div class="title-icon">❤</div>
                     </div>
-                    <div>GALLERY</div>
+                    <div>{{ subtitle }}</div>
                 </AutoFloatUpText>
             </div>
-            <div class="selection-text-content">
-                <RevealText is-title>
-                    欢迎来到 GALLERY！
-                </RevealText>
-                <RevealText>
-                    一些瞬间, 被悄悄印成卡片
-                </RevealText>
-                <RevealText>
-                    斑斓的, 沉默的, 都变成轻巧的纸
-                </RevealText>
-                <RevealText>
-                    海在远方, 故事在指尖
-                </RevealText>
-                <RevealText>
-                    这里没有终点, 只有翻页的声音
-                </RevealText>
-            </div>
-            <div class="selection-text-content">
-                <RevealText is-title>
-                    这是一份电子纪念册
-                </RevealText>
-                <RevealText>
-                    从一艘舰, 到一片海
-                </RevealText>
-                <RevealText>
-                    从几何的沉默, 到蓝调时刻
-                </RevealText>
-                <RevealText>
-                    这些明信片, 和你同走过一座城
-                </RevealText>
-                <RevealText>
-                    剩下的, 交给你来翻阅
+            <div
+                class="selection-text-content"
+                v-for="(section, idx) in sections"
+                :key="idx"
+            >
+                <RevealText
+                    v-for="(line, lineIdx) in section.lines"
+                    :key="lineIdx"
+                    :is-title="line.isTitle"
+                >
+                    {{ line.text }}
                 </RevealText>
             </div>
         </section>
