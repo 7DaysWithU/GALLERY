@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted} from 'vue'
+import {ref, computed, onMounted, onUnmounted} from 'vue'
 
 
 const props = withDefaults(defineProps<{
     once?: boolean
+    delay?: number
 }>(), {
-    once: true
+    once: true,
+    delay: 0
 })
 
 const elRef = ref<HTMLElement | null>(null)
 const internalActive = ref(false)
 let observer: IntersectionObserver | null = null
 let hasTriggered = false
+
+const delayStyle = computed(() => ({
+    transitionDelay: `${props.delay}ms`
+}))
 
 onMounted(() => {
     if (!elRef.value) return
@@ -56,14 +62,16 @@ onUnmounted(() => {
          ref="elRef"
     >
         <div class="auto-float-up-text"
-             :class="{ 'is-active': internalActive }">
+             :class="{ 'is-active': internalActive }"
+             :style="delayStyle"
+        >
             <slot/>
         </div>
     </div>
 </template>
 
 <style scoped>
-.auto-float-up-text-wrapper{
+.auto-float-up-text-wrapper {
     overflow: hidden;
 }
 

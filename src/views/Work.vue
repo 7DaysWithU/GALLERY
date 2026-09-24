@@ -35,7 +35,7 @@ onMounted(async () => {
                 >{{ currentSeriesConfig.title }}
                 </ImageFillText>
             </AutoFloatUpText>
-            <AutoFloatUpText>
+            <AutoFloatUpText :delay="300">
                 <div class="section-text-desc">
                     <div class="desc-content">
                         {{ currentSeriesConfig.description }}

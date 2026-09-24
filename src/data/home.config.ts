@@ -79,7 +79,7 @@ export const homeBanners: HomeBannerItem[] = [
         src: basePath + '海滨叙事诗_童话.jpg',
         title: '渔人码头',
         desc: '欧式屋檐下, 海风藏了故事',
-        offsetY: -3
+        offsetY: 0
     },
     {
         src: basePath + '蓝调时刻_暴雨.jpg',
